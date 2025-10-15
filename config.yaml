@@ -1,0 +1,25 @@
+rabbitmq:
+  host: localhost
+  port: 15672
+  username: guest
+  password: guest
+  vhost: /
+
+consumers:
+  - name: email_consumer
+    script: consumers/email_consumer.py
+    queue: email_queue
+    min_instances: 1
+    max_instances: 3
+    scale_up_threshold: 5
+    scale_down_threshold: 1
+
+  - name: pdf_consumer
+    script: consumers/pdf_consumer.py
+    queue: pdf_queue
+    min_instances: 1
+    max_instances: 3
+    scale_up_threshold: 5
+    scale_down_threshold: 1
+
+poll_interval: 3
